@@ -1,7 +1,6 @@
-package net.kaupenjoe.mccourse.block;
+package me.goldenkitten.fallen_age.block;
 
-import net.kaupenjoe.mccourse.MCCourseMod;
-import net.kaupenjoe.mccourse.item.ModItems;
+import me.goldenkitten.fallen_age.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +17,7 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
-            DeferredRegister.create(ForgeRegistries.BLOCKS, MCCourseMod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCKS, me.goldenkitten.fallen_age.FallenAge.MOD_ID);
 
     public static final RegistryObject<Block> ALEXANDRITE_BLOCK = registerBlock("alexandrite_block",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE)

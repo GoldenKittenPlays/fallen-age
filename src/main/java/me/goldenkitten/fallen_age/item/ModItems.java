@@ -1,6 +1,5 @@
-package net.kaupenjoe.mccourse.item;
+package me.goldenkitten.fallen_age.item;
 
-import net.kaupenjoe.mccourse.MCCourseMod;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -9,7 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, MCCourseMod.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.ITEMS, me.goldenkitten.fallen_age.FallenAge.MOD_ID);
 
     public static final RegistryObject<Item> ALEXANDRITE = ITEMS.register("alexandrite",
             () -> new Item(new Item.Properties()));

@@ -1,9 +1,9 @@
-package net.kaupenjoe.mccourse;
+package me.goldenkitten.fallen_age;
 
 import com.mojang.logging.LogUtils;
-import net.kaupenjoe.mccourse.block.ModBlocks;
-import net.kaupenjoe.mccourse.item.ModCreativeModeTabs;
-import net.kaupenjoe.mccourse.item.ModItems;
+import me.goldenkitten.fallen_age.block.ModBlocks;
+import me.goldenkitten.fallen_age.item.ModCreativeModeTabs;
+import me.goldenkitten.fallen_age.item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,12 +18,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(MCCourseMod.MOD_ID)
-public class MCCourseMod {
-    public static final String MOD_ID = "mccourse";
+@Mod(me.goldenkitten.fallen_age.FallenAge.MOD_ID)
+public class FallenAge {
+    public static final String MOD_ID = "fallen_age";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public MCCourseMod() {
+    public FallenAge() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModCreativeModeTabs.register(modEventBus);
@@ -36,6 +36,7 @@ public class MCCourseMod {
 
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+        LOGGER.info("Loaded!");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
