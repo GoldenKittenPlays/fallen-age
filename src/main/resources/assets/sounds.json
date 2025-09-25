@@ -1,0 +1,18 @@
+{
+  "desolate_hope": {
+    "sounds": [
+      {
+        "name": "fallen_age:desolate_hope",
+        "stream": true
+      }
+    ]
+  },
+  "desolate_echoes": {
+    "sounds": [
+      {
+        "name": "fallen_age:desolate_echoes",
+        "stream": true
+      }
+    ]
+  }
+}

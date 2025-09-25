@@ -13,15 +13,25 @@ public class ModCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, me.goldenkitten.fallen_age.FallenAge.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> FALLEN_AGE_TAB = CREATIVE_MODE_TABS.register("fallen_age_tab",
+    public static final RegistryObject<CreativeModeTab> FALLEN_AGE_TAB = CREATIVE_MODE_TABS.register("fallen_age",
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ALEXANDRITE.get()))
-                    .title(Component.translatable("creativetab.fallen_age_tab"))
+                    .title(Component.translatable("creativetab.fallen_age"))
                     .displayItems((displayParameters, output) -> {
                         output.accept(ModItems.ALEXANDRITE.get());
                         output.accept(ModItems.RAW_ALEXANDRITE.get());
+                        output.accept(ModBlocks.ALEXANDRITE_ORE.get());
+                        output.accept(ModBlocks.DEEPSLATE_ALEXANDRITE_ORE.get());
+                        output.accept(ModBlocks.END_STONE_ALEXANDRITE_ORE.get());
+                        output.accept(ModBlocks.NETHER_ALEXANDRITE_ORE.get());
 
                         output.accept(ModBlocks.ALEXANDRITE_BLOCK.get());
                         output.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK.get());
+
+                        output.accept(ModBlocks.CORRUPTION_BLOCK.get());
+
+                        output.accept(ModBlocks.DRY_SAPLING.get());
+                        output.accept(ModBlocks.DRY_LEAVES.get());
+                        output.accept(ModBlocks.DRY_LOG.get());
                     }).build());
 
 

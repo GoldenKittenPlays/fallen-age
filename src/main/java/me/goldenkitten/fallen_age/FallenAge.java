@@ -4,6 +4,11 @@ import com.mojang.logging.LogUtils;
 import me.goldenkitten.fallen_age.block.ModBlocks;
 import me.goldenkitten.fallen_age.item.ModCreativeModeTabs;
 import me.goldenkitten.fallen_age.item.ModItems;
+import me.goldenkitten.fallen_age.sound.ModSounds;
+import me.goldenkitten.fallen_age.world_gen.biome.ModTerraBlenderAPI;
+import me.goldenkitten.fallen_age.world_gen.biome.surface.ModSurfaceRules;
+import me.goldenkitten.fallen_age.world_gen.tree.ModFoliagePlacerTypes;
+import me.goldenkitten.fallen_age.world_gen.tree.ModTrunkPlacerTypes;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,6 +21,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import terrablender.api.SurfaceRuleManager;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(me.goldenkitten.fallen_age.FallenAge.MOD_ID)
@@ -31,6 +37,12 @@ public class FallenAge {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModSounds.register(modEventBus);
+
+        ModTrunkPlacerTypes.register(modEventBus);
+        ModFoliagePlacerTypes.register(modEventBus);
+
+        ModTerraBlenderAPI.registerRegions();
 
         modEventBus.addListener(this::commonSetup);
 
@@ -40,7 +52,9 @@ public class FallenAge {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID, ModSurfaceRules.makeRules());
+        });
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -52,6 +66,7 @@ public class FallenAge {
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(ModBlocks.ALEXANDRITE_BLOCK);
             event.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
+            event.accept(ModBlocks.DRY_LOG);
         }
     }
 
