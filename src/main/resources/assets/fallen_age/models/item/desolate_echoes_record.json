@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "fallen_age:item/desolate_echoes_record"
+  }
+}

@@ -66,7 +66,8 @@ public class CorruptionBlock extends Block {
 
     @Override
     public void stepOn(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, Entity pEntity) {
-        if (!pEntity.isSteppingCarefully() && pEntity instanceof LivingEntity living && !Utils.hasEnchant(Enchantments.ALL_DAMAGE_PROTECTION, living)) {
+        //Add for shift to not damage: !pEntity.isSteppingCarefully()
+        if (pEntity instanceof LivingEntity living && !Utils.hasEnchant(Enchantments.ALL_DAMAGE_PROTECTION, living)) {
             MobEffectInstance current = living.getEffect(MobEffects.WITHER);
 
             // Apply only if:
@@ -75,7 +76,7 @@ public class CorruptionBlock extends Block {
             if (current == null || current.getDuration() <= 20) {
                 living.addEffect(new MobEffectInstance(
                         MobEffects.WITHER,
-                        20, // 20 ticks = 1 second
+                        40, // 40 ticks = 2 second
                         0,  // amplifier (0 = Wither I)
                         false, // ambient
                         true   // show particles

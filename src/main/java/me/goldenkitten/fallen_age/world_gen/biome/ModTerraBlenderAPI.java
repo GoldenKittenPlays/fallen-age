@@ -7,6 +7,6 @@ import terrablender.api.Regions;
 
 public class ModTerraBlenderAPI {
     public static void registerRegions() {
-        Regions.register(new ModOverworldRegion(new ResourceLocation(FallenAge.MOD_ID, "overworld"), Integer.MAX_VALUE - 1));
+        Regions.register(new ModOverworldRegion(new ResourceLocation(FallenAge.MOD_ID, "overworld"), 1000));
     }
 }

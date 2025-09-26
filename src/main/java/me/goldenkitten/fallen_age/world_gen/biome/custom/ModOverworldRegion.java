@@ -22,8 +22,14 @@ public class ModOverworldRegion extends Region {
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint,
             ResourceKey<Biome>>> mapper) {
         this.addModifiedVanillaOverworldBiomes(mapper, modifiedVanillaOverworldBuilder -> {
-            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.DESERT, ModBiomes.DESOLATE_BIOME);
-            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.PLAINS, ModBiomes.DESOLATE_BIOME);
+            for (ResourceKey<Biome> biome : Utils.getOverworldBiomes()) {
+                if (!biome.equals(Biomes.MUSHROOM_FIELDS)) {
+                    modifiedVanillaOverworldBuilder.replaceBiome(biome, ModBiomes.DESOLATE_BIOME);
+                }
+                else {
+                    modifiedVanillaOverworldBuilder.replaceBiome(biome, ModBiomes.HOPE_BIOME);
+                }
+            }
         });
     }
 }

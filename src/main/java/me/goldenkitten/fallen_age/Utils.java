@@ -1,12 +1,16 @@
 package me.goldenkitten.fallen_age;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -179,5 +183,47 @@ public class Utils {
             }
         }
         return result;
+    }
+
+    public static BlockPos getSafeHighestBlockAt(ServerLevel level, BlockPos pos) {
+        // Start from the heightmap top (ignores leaves)
+        int x = pos.getX(), z = pos.getZ();
+        BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new BlockPos(x, 0, z));
+
+        // Walk down to find a solid block with two free blocks above
+        for (int y = top.getY(); y >= level.getMinBuildHeight(); y--) {
+            BlockPos current = new BlockPos(x, y, z);
+            BlockState state = level.getBlockState(current);
+
+            // new replacement for blocksMotion(): check collision shape & not a liquid
+            boolean hasCollision = !state.getCollisionShape(level, current).isEmpty();
+            boolean isLiquid = !state.getFluidState().isEmpty();
+
+            if (hasCollision && !isLiquid) {
+                BlockPos above = current.above();
+                BlockPos above2  = current.above(2);
+
+                // require two empty blocks above for player
+                if (level.isEmptyBlock(above) && level.isEmptyBlock(above2)) {
+                    // avoid bedrock/min layer spawn
+                    if (current.getY() > level.getMinBuildHeight() + 1) {
+                        return above;
+                    }
+                }
+            }
+        }
+
+        // fallback attempts: try top.above() if free, else search upward a bit
+        BlockPos fallback = top.above();
+        if (level.isEmptyBlock(fallback) && level.isEmptyBlock(fallback.above())) {
+            return fallback;
+        }
+        for (int y = top.getY() + 1; y < level.getMaxBuildHeight(); y++) {
+            BlockPos p = new BlockPos(x, y, z);
+            if (level.isEmptyBlock(p) && level.isEmptyBlock(p.above())) return p;
+        }
+
+        // last resort: return top.above() even if imperfect
+        return fallback;
     }
 }

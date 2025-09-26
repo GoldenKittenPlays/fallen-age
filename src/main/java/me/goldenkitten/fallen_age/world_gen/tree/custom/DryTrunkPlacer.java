@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class DryTrunkPlacer extends TrunkPlacer {
-    public static final Codec<DryTrunkPlacer> CODEC = RecordCodecBuilder.create(walnutTrunkPlacerInstance ->
-            trunkPlacerParts(walnutTrunkPlacerInstance).apply(walnutTrunkPlacerInstance, DryTrunkPlacer::new));
+    public static final Codec<DryTrunkPlacer> CODEC = RecordCodecBuilder.create(dryTrunkPlacerInstance ->
+            trunkPlacerParts(dryTrunkPlacerInstance).apply(dryTrunkPlacerInstance, DryTrunkPlacer::new));
 
     public DryTrunkPlacer(int pBaseHeight, int pHeightRandA, int pHeightRandB) {
         super(pBaseHeight, pHeightRandA, pHeightRandB);

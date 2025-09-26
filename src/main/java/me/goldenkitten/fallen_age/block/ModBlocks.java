@@ -29,6 +29,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> ALEXANDRITE_BLOCK = registerBlock("alexandrite_block",
             () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE)
                     .requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL)));
+    public static final RegistryObject<Block> DESOLATE_SOIL = registerBlock("desolate_soil",
+            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.SNARE)
+                    .requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.ANCIENT_DEBRIS)));
     public static final RegistryObject<Block> CORRUPTION_BLOCK = registerBlock("corruption_block",
             CorruptionBlock::new);
     public static final RegistryObject<Block> RAW_ALEXANDRITE_BLOCK = registerBlock("raw_alexandrite_block",
